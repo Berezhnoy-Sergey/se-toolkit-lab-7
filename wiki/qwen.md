@@ -124,21 +124,9 @@ The file must be non-empty.
 
 ### Set up the `Qwen Code` CLI (remote machine)
 
-1. [Set up the `Qwen Code` CLI on your local machine](#set-up-the-qwen-code-cli-local-machine).
+1. [Connect to the VM](./ssh.md#connect-to-the-vm).
 
-2. [Check the `Qwen Code` credentials file](#check-the-qwen-code-credentials-file).
-
-3. To copy the credentials file to your VM,
-
-   [run in the `VS Code Terminal`](./vs-code.md#run-a-command-in-the-vs-code-terminal):
-
-   ```terminal
-   scp ~/.qwen/oauth_creds.json se-toolkit-vm:~/.qwen/oauth_creds.json
-   ```
-
-4. [Connect to the VM](./ssh.md#connect-to-the-vm).
-
-5. To install [`pnpm`](./nodejs.md#pnpm),
+2. To install [`pnpm`](./nodejs.md#pnpm),
 
    [run in the `VS Code Terminal`](./vs-code.md#run-a-command-in-the-vs-code-terminal):
 
@@ -146,7 +134,7 @@ The file must be non-empty.
    nix profile add nixpkgs#pnpm
    ```
 
-6. To set up `pnpm`,
+3. To set up `pnpm`,
 
    [run in the `VS Code Terminal`](./vs-code.md#run-a-command-in-the-vs-code-terminal):
 
@@ -154,7 +142,7 @@ The file must be non-empty.
    pnpm setup
    ```
 
-7. To update the current shell environment with `pnpm` variables set in the [shell profile](./shell.md#profile),
+4. To update the current shell environment with `pnpm` variables set in the [shell profile](./shell.md#profile),
 
    [run in the `VS Code Terminal`](./vs-code.md#run-a-command-in-the-vs-code-terminal):
 
@@ -162,7 +150,7 @@ The file must be non-empty.
    source ~/.bashrc
    ```
 
-8. To install [`Qwen Code`](#what-is-qwen-code),
+5. To install [`Qwen Code`](#what-is-qwen-code),
 
    [run in the `VS Code Terminal`](./vs-code.md#run-a-command-in-the-vs-code-terminal):
 
@@ -170,7 +158,11 @@ The file must be non-empty.
    pnpm add -g @qwen-code/qwen-code
    ```
 
-9. You should now be able to [open a chat with `Qwen Code` using the CLI](#open-a-chat-with-qwen-code-using-the-cli).
+6. [Open a chat with `Qwen Code` using the CLI](#open-a-chat-with-qwen-code-using-the-cli).
+
+7. Write `/auth` in the chat to [authenticate via Qwen OAuth](https://github.com/QwenLM/qwen-code?tab=readme-ov-file#authentication).
+
+8. Open the link in a browser to complete the authentication procedure.
 
 ### Set up the `Qwen Code` API (remote machine)
 
