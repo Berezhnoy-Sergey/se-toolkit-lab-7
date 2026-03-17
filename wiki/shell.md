@@ -12,6 +12,7 @@
 - [Shell profile](#shell-profile)
   - [Reload the shell profile](#reload-the-shell-profile)
 - [Shell prompt](#shell-prompt)
+  - [`SSH` shell prompt](#ssh-shell-prompt)
 - [Shell session](#shell-session)
   - [Exit the shell session](#exit-the-shell-session)
 - [Shell command](#shell-command)
@@ -104,13 +105,21 @@ Common profile files:
 ## Shell prompt
 
 The shell prompt is the text the shell displays before each command, indicating it is ready to accept input.
-It typically shows the current [user](./operating-system.md#user), machine name, and [working directory](#current-working-directory).
 
-A typical `bash` prompt looks like:
+It typically shows the current [user](./operating-system.md#user), machine name, and the [current working directory](#current-working-directory).
+
+### `SSH` shell prompt
+
+A typical [`SSH` shell](./ssh.md#ssh-shell) prompt looks like:
 
 ```terminal
-username@hostname:~/directory$
+<user>@<host>:<directory-path>$
 ```
+
+See:
+
+- [`<user>`](./operating-system.md#user-placeholder)
+- [`<host>`](./computer-networks.md#host-placeholder)
 
 > [!NOTE]
 > The `$` at the end indicates a regular user.
