@@ -71,11 +71,12 @@ The [username](#bot-username) of your bot.
 ## Deploy the bot on the VM
 
 1. [Connect to the VM as the user `admin` (LOCAL)](./vm-access.md#connect-to-the-vm-as-the-user-user-local).
-2. [Enter the repository directory (REMOTE)](#enter-the-repository-directory-remote).
-3. [Configure the environment (REMOTE)](#configure-the-environment-remote).
-4. [Start the bot (REMOTE)](#start-the-bot).
-5. [Check the bot (REMOTE)](#check-the-bot-via-uv-run-poe).
-6. [Check the bot in `Telegram`](#check-the-bot-in-telegram).
+2. [Install `uv` (REMOTE)](./python.md#install-uv).
+3. [Enter the repository directory (REMOTE)](#enter-the-repository-directory-remote).
+4. [Configure the environment (REMOTE)](#configure-the-environment-remote).
+5. [Start the bot (REMOTE)](#start-the-bot).
+6. [Check the bot (REMOTE)](#check-the-bot-via-uv-run-poe).
+7. [Check the bot in `Telegram`](#check-the-bot-in-telegram).
 
 ### Enter the repository directory (REMOTE)
 
