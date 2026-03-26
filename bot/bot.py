@@ -3,6 +3,9 @@ import sys
 import argparse
 from handlers import commands
 
+from dotenv import load_dotenv
+load_dotenv()
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--test", help="Test mode: run command and print response")
