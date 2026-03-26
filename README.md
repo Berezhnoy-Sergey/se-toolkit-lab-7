@@ -95,3 +95,12 @@ By the end of this lab, you should be able to say:
 ### Optional
 
 1. [Flutter Web Chatbot](./lab/tasks/optional/task-1.md)
+
+## Deploy
+
+1. Clone the repository on your VM:
+   ```bash
+   git clone https://github.com/your-username/se-toolkit-lab-7.git
+   cd se-toolkit-lab-7
+   cp .env.docker.example .env.docker.secret
+   nano .env.docker.secret
