@@ -55,3 +55,68 @@ class BackendAPI:
         except Exception as e:
             print(f"Health check error: {e}", file=sys.stderr)
             return False
+    async def get_learners(self) -> List[Dict[str, Any]]:
+        async with httpx.AsyncClient() as client:
+            resp = await client.get(
+                f"{self.base_url}/learners/",
+                headers=self.headers,
+                timeout=10.0
+            )
+            resp.raise_for_status()
+            return resp.json()
+    
+    async def get_timeline(self, lab: str) -> List[Dict[str, Any]]:
+        async with httpx.AsyncClient() as client:
+            resp = await client.get(
+                f"{self.base_url}/analytics/timeline",
+                params={"lab": lab},
+                headers=self.headers,
+                timeout=10.0
+            )
+            resp.raise_for_status()
+            return resp.json()
+    
+    async def get_groups(self, lab: str) -> List[Dict[str, Any]]:
+        async with httpx.AsyncClient() as client:
+            resp = await client.get(
+                f"{self.base_url}/analytics/groups",
+                params={"lab": lab},
+                headers=self.headers,
+                timeout=10.0
+            )
+            resp.raise_for_status()
+            return resp.json()
+    
+    async def get_top_learners(self, lab: str, limit: int = 5) -> List[Dict[str, Any]]:
+        async with httpx.AsyncClient() as client:
+            resp = await client.get(
+                f"{self.base_url}/analytics/top-learners",
+                params={"lab": lab, "limit": limit},
+                headers=self.headers,
+                timeout=10.0
+            )
+            resp.raise_for_status()
+            return resp.json()
+    
+    async def get_completion_rate(self, lab: str) -> float:
+        async with httpx.AsyncClient() as client:
+            resp = await client.get(
+                f"{self.base_url}/analytics/completion-rate",
+                params={"lab": lab},
+                headers=self.headers,
+                timeout=10.0
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            return data.get("completion_rate", 0)
+    
+    async def trigger_sync(self) -> Dict[str, Any]:
+        async with httpx.AsyncClient() as client:
+            resp = await client.post(
+                f"{self.base_url}/pipeline/sync",
+                headers=self.headers,
+                json={},
+                timeout=30.0
+            )
+            resp.raise_for_status()
+            return resp.json()

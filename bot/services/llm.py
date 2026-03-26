@@ -39,7 +39,7 @@ TOOLS = [
         "type": "function",
         "function": {
             "name": "get_scores_distribution",
-            "description": "Get score distribution for a lab",
+            "description": "Get score distribution (4 buckets) for a lab",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -48,26 +48,114 @@ TOOLS = [
                 "required": ["lab"]
             }
         }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_learners",
+            "description": "Get list of all learners (students)",
+            "parameters": {"type": "object", "properties": {}}
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_timeline",
+            "description": "Get submission timeline for a lab",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lab": {"type": "string", "description": "Lab identifier"}
+                },
+                "required": ["lab"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_groups",
+            "description": "Get per-group performance for a lab",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lab": {"type": "string", "description": "Lab identifier"}
+                },
+                "required": ["lab"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_top_learners",
+            "description": "Get top learners for a lab",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lab": {"type": "string", "description": "Lab identifier"},
+                    "limit": {"type": "integer", "description": "Number of top learners", "default": 5}
+                },
+                "required": ["lab"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_completion_rate",
+            "description": "Get completion rate for a lab",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "lab": {"type": "string", "description": "Lab identifier"}
+                },
+                "required": ["lab"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "trigger_sync",
+            "description": "Trigger ETL sync to refresh data from autochecker",
+            "parameters": {"type": "object", "properties": {}}
+        }
     }
 ]
 
+
 SYSTEM_PROMPT = """You are an assistant for a learning management system.
-Your task is to route user questions to the appropriate tool.
+Your ONLY job is to route user questions to the correct tool.
 
-IMPORTANT: You MUST use the tools. Do NOT answer questions yourself.
+IMPORTANT: You MUST call a tool. Do NOT answer questions yourself.
 
-- If user asks about available labs → call get_labs
-- If user asks about scores, pass rates, or task performance for a specific lab → call get_pass_rates with the lab parameter
-- If user asks about score distribution → call get_scores_distribution
+Available tools:
+- get_labs(): List all labs
+- get_pass_rates(lab): Pass rates for tasks in a lab
+- get_learners(): List all learners (students)
+- get_timeline(lab): Submission timeline for a lab
+- get_groups(lab): Group performance for a lab
+- get_top_learners(lab, limit): Top learners in a lab
+- get_completion_rate(lab): Completion percentage for a lab
+- trigger_sync(): Refresh data from autochecker
 
 Examples:
-- "what labs are available?" → get_labs()
-- "show me scores for lab-04" → get_pass_rates(lab="lab-04")
-- "lab 3 pass rates" → get_pass_rates(lab="lab-03")
-- "score distribution lab 5" → get_scores_distribution(lab="lab-05")
+- "how many students are enrolled" → get_learners()
+- "which lab has the lowest pass rate" → get_pass_rates for each lab (you'll need multiple calls)
+- "sync the data" → trigger_sync()
+- "lab 4 pass rates" → get_pass_rates(lab="lab-04")
 
-If you cannot match to any tool, respond with "I didn't understand that. Try asking about labs or scores."
-"""
+When user asks about lowest/highest pass rate, you may need to call get_pass_rates for multiple labs.
+When user asks about student count, call get_learners() and count the results.
+
+Answer in natural language, be concise. Include numbers from the data.
+
+For comparison questions like "which lab has the lowest pass rate":
+1. First call get_labs() to get all labs
+2. Then call get_pass_rates() for each lab
+3. Compare the average pass rates to find the lowest
+4. Answer with the lab name and its pass rate"""
 
 TOOLS = [
     {
