@@ -29,7 +29,8 @@ def main():
         elif cmd == "/scores":
             print("Usage: /scores <lab>")
         else:
-            print(f"Unknown command: {cmd}. Try /help")
+            from handlers.commands import handle_text
+            print(handle_text(args.test))
         return
     
     print("Bot starting... (real Telegram mode not implemented)")
