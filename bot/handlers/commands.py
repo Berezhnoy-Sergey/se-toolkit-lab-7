@@ -17,12 +17,8 @@ def help() -> str:
 
 def health() -> str:
     try:
-        # Run async function in sync context
-        is_healthy = asyncio.run(api.health_check())
-        if is_healthy:
-            return "✅ Backend is healthy."
-        else:
-            return "❌ Backend is not responding. Check if services are running."
+        items_count = asyncio.run(api.get_items_count())
+        return f"✅ Backend is healthy. {items_count} items available."
     except Exception as e:
         return f"❌ Backend error: {str(e)}"
 

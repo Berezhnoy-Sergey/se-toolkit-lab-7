@@ -31,6 +31,10 @@ class BackendAPI:
             )
             resp.raise_for_status()
             return resp.json()
+    async def get_items_count(self) -> int:
+        """Get number of items in database."""
+        items = await self.get_items()
+        return len(items)    
     
     async def get_pass_rates(self, lab: str) -> List[Dict[str, Any]]:
         async with httpx.AsyncClient() as client:
